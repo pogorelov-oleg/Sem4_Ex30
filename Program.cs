@@ -7,14 +7,12 @@ while (true)
     int countMax = GetUserNumber($"Введите максимальное положительное значение в массиве: ", "ОШИБКА! Вы ввели некорректные значения!");
     int arrLength = 8;
 
-    if (countMax - countMin >= arrLength - 1 && countMin > 0)
+    if (countMax - countMin >= arrLength - 1)
     {
         int[] arr = GetRandomArray(countMin, countMax, arrLength);
         PrintArray(arr);
         break;
     }
-    else if (countMin <= 0)
-        Console.WriteLine($"ОШИБКА! Число дольжно быть больше нуля");
     else
         Console.WriteLine($"ОШИБКА! Слишком маленький диапозон чисел, чтобы заполнить весь массив.");
 }
@@ -31,6 +29,7 @@ void PrintArray(int[] array)
 int[] GetRandomArray(int countMin, int countMax, int length)
 {
     int[] array = new int[length];
+    InitArrayByNumber(array, -1000);
     for (int i = 0; i < array.Length; i++)
     {
         int random = new Random().Next(countMin, countMax + 1);
@@ -52,7 +51,7 @@ bool CheckNumInArray(int[] arr, int num)
     return false;
 }
 
-static int GetUserNumber(string message, string errorMessage)
+int GetUserNumber(string message, string errorMessage)
 {
     while (true)
     {
@@ -63,5 +62,14 @@ static int GetUserNumber(string message, string errorMessage)
         }
         else Console.WriteLine(errorMessage);
     }
+}
+
+int[] InitArrayByNumber(int[] arr, int initNumber)
+{
+    for (int i = 0; i < arr.Length; i++)
+    {
+        arr[i] = initNumber;
+    }
+    return arr;
 }
 
